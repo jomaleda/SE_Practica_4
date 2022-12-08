@@ -72,6 +72,8 @@ _ngo/
 _xmsgs/
 SDK/.metadata/
 __xps/.dswkshop/
+implementation/
+synthesis/
 
 system_incl.make
 system.make
@@ -81,3 +83,4 @@ __xps/simgen.opt
 __xps/ise/system.xreport
 
 # End of https://www.toptal.com/developers/gitignore/api/xilinxise
+*.bmm

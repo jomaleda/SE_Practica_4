@@ -130,8 +130,6 @@ signal RAM : ram_type :=
 
 
 signal hsyncbAux : std_logic;
-signal aux : std_logic_vector(2 downto 0);
-signal aux2 : std_logic_vector(2 downto 0);
 
 --Senales del debouncer
 signal xDebRisingEdge_deb : std_logic;
@@ -256,25 +254,22 @@ begin
 	end if;
 end process;
 
-contador <= aux;
-contador_up <= aux2;
-
 pcounter: process(clock,reset,boton_abajo,boton_arriba,boton_derecha,boton_izquierda)
 begin
 	if reset='1' then
-		aux2 <= "000";
-		aux <= "000";
+		contador_up <= "000";
+		contador <= "000";
 	elsif (clock'event and clock = '1') then	
 		if boton_derecha = '1' then 
-			aux<=aux+1;
+			contador<=contador+1;
 		elsif boton_izquierda = '1' then 
-			aux<=aux-1;
+			contador<=contador-1;
 		end if;
 		
 		if boton_arriba = '1' then 
-			aux2<=aux2+1;
+			contador_up<=contador_up+1;
 		elsif boton_abajo = '1' then 
-			aux2<=aux2-1;
+			contador_up<=contador_up-1;
 		end if;
 	end if;
 end process;
@@ -295,12 +290,12 @@ end process;
 
 process(vcnt, hcnt, RAM)
 begin
-	--if vcnt(9 downto 8)="00" and hcnt(8 downto 6)="000" then   -- hasta donde marque contador
-	--if vcnt(9 downto 7)>=contador_up and vcnt(9 downto 7)<(contador_up-1) and vcnt(7 downto 4)<=switches(3 downto 0) and hcnt(8 downto 6)>=contador and hcnt(8 downto 6)<(contador-1) and hcnt(6 downto 3)<=switches(7 downto 4) then
-	if vcnt(9 downto 7)>=contador_up and vcnt(9 downto 7)<(contador_up-1) and vcnt(9 downto 7)<=switches(3 downto 0) and hcnt(8 downto 6)>=contador and hcnt(8 downto 6)<(contador-1) and hcnt(8 downto 6)<=switches(7 downto 4) then
-	--if vcnt(9 downto 7)=contador_up and vcnt(7 downto 4)<=switches(3 downto 0) and hcnt(8 downto 6)=contador and hcnt(6 downto 3)<=switches(7 downto 4) then
+	--if vcnt(9 downto 7)>=contador_up and vcnt(9 downto 7)<(contador_up-1) and vcnt(9 downto 7)<=switches(3 downto 0)
+		--and hcnt(8 downto 6)>=contador and hcnt(8 downto 6)<(contador-1) and hcnt(8 downto 6)<=switches(7 downto 4) then
+	if vcnt(9 downto 7)>=contador_up and vcnt(9 downto 7)<=switches(3 downto 0)
+		and hcnt(8 downto 6)>=contador and hcnt(8 downto 6)<=switches(7 downto 4) then
+		rgb<=RAM(conv_integer(hcnt(6 downto 3)&vcnt(7 downto 4)));
 		--rgb<=RAM(conv_integer(hcnt(5 downto 3)&vcnt(7 downto 4)));
-		rgb<=RAM(conv_integer(hcnt(6 downto 3)&vcnt(9 downto 4)));
 	else
 		rgb<="000000000";
 	end if;
