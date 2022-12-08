@@ -10,6 +10,7 @@
 *.drc
 *.ll
 *.lso
+*.log
 *.msd
 *.msk
 *.ncd
@@ -69,5 +70,7 @@ xlnx_auto_0_xdb/
 xst/
 _ngo/
 _xmsgs/
+SDK/.metadata/
+__xps/.dswkshop/
 
 # End of https://www.toptal.com/developers/gitignore/api/xilinxise

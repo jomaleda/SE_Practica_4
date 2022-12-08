@@ -1,0 +1,88 @@
+
+ PARAMETER VERSION = 2.1.0
+
+
+ PORT Rst_pin = plb_v46_0_SYS_Rst, DIR = I, SIGIS = RST
+ PORT leds = leds_GPIO_IO, DIR = IO, VEC = [0:7]
+ PORT RX_pin = xps_uartlite_0_RX, DIR = I
+ PORT TX_pin = xps_uartlite_0_TX, DIR = O
+ PORT pantalla_0_hsyncb_pin = pantalla_0_hsyncb, DIR = O
+ PORT pantalla_0_vsyncb_pin = pantalla_0_vsyncb, DIR = O
+ PORT pantalla_0_rgb_pin = pantalla_0_rgb, DIR = O, VEC = [0:8]
+ PORT pantalla_0_b_izq_pin = net_pantalla_0_b_izq_pin, DIR = I
+ PORT pantalla_0_b_der_pin = net_pantalla_0_b_der_pin, DIR = I
+ PORT pantalla_0_b_arr_pin = net_pantalla_0_b_arr_pin, DIR = I
+ PORT pantalla_0_b_aba_pin = net_pantalla_0_b_aba_pin, DIR = I
+ PORT pantalla_0_switches_pin = net_pantalla_0_switches_pin, DIR = I, VEC = [0:7]
+ PORT Clk_pin = net_plb_v46_0_PLB_Clk_pin, DIR = I, SIGIS = CLK
+
+
+BEGIN microblaze
+ PARAMETER INSTANCE = microblaze_0
+ PARAMETER HW_VER = 8.30.a
+ BUS_INTERFACE DPLB = plb_v46_0
+ BUS_INTERFACE IPLB = plb_v46_0
+ PORT MB_RESET = plb_v46_0_SYS_Rst
+END
+
+BEGIN plb_v46
+ PARAMETER INSTANCE = plb_v46_0
+ PARAMETER HW_VER = 1.05.a
+ PORT PLB_Clk = net_plb_v46_0_PLB_Clk_pin
+ PORT SYS_Rst = plb_v46_0_SYS_Rst
+END
+
+BEGIN bram_block
+ PARAMETER INSTANCE = bram_block_0
+ PARAMETER HW_VER = 1.00.a
+ BUS_INTERFACE PORTA = xps_bram_if_cntlr_0_PORTA
+END
+
+BEGIN xps_bram_if_cntlr
+ PARAMETER INSTANCE = xps_bram_if_cntlr_0
+ PARAMETER HW_VER = 1.00.b
+ PARAMETER C_SPLB_NATIVE_DWIDTH = 32
+ PARAMETER C_BASEADDR = 0x00000000
+ PARAMETER C_HIGHADDR = 0x00007fff
+ BUS_INTERFACE SPLB = plb_v46_0
+ BUS_INTERFACE PORTA = xps_bram_if_cntlr_0_PORTA
+END
+
+BEGIN xps_uartlite
+ PARAMETER INSTANCE = xps_uartlite_0
+ PARAMETER HW_VER = 1.02.a
+ PARAMETER C_USE_PARITY = 0
+ PARAMETER C_SPLB_CLK_FREQ_HZ = 50000000
+ PARAMETER C_BASEADDR = 0x84000000
+ PARAMETER C_HIGHADDR = 0x8400ffff
+ BUS_INTERFACE SPLB = plb_v46_0
+ PORT RX = xps_uartlite_0_RX
+ PORT TX = xps_uartlite_0_TX
+END
+
+BEGIN xps_gpio
+ PARAMETER INSTANCE = ledsi
+ PARAMETER HW_VER = 2.00.a
+ PARAMETER C_GPIO_WIDTH = 8
+ PARAMETER C_BASEADDR = 0x84018000
+ PARAMETER C_HIGHADDR = 0x840181ff
+ BUS_INTERFACE SPLB = plb_v46_0
+ PORT GPIO_IO = leds_GPIO_IO
+END
+
+BEGIN pantalla
+ PARAMETER INSTANCE = pantalla_0
+ PARAMETER HW_VER = 1.00.a
+ PARAMETER C_BASEADDR = 0xcd400000
+ PARAMETER C_HIGHADDR = 0xcd40ffff
+ BUS_INTERFACE SPLB = plb_v46_0
+ PORT hsyncb = pantalla_0_hsyncb
+ PORT vsyncb = pantalla_0_vsyncb
+ PORT rgb = pantalla_0_rgb
+ PORT b_izq = net_pantalla_0_b_izq_pin
+ PORT b_der = net_pantalla_0_b_der_pin
+ PORT b_arr = net_pantalla_0_b_arr_pin
+ PORT b_aba = net_pantalla_0_b_aba_pin
+ PORT switches = net_pantalla_0_switches_pin
+END
+

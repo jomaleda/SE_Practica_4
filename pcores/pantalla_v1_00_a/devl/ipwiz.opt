@@ -1,0 +1,8 @@
+-batch 
+-create pantalla 
+-ver 1.00.a 
+-dir "C:\Users\jaroa\Desktop\Practica4" 
+-lang vhdl 
+-bus plbv46 s 
+-wfifo 1 512 
+-xps 
