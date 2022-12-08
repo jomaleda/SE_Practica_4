@@ -73,4 +73,11 @@ _xmsgs/
 SDK/.metadata/
 __xps/.dswkshop/
 
+system_incl.make
+system.make
+etc/system.gui
+__xps/system.xml
+__xps/simgen.opt
+__xps/ise/system.xreport
+
 # End of https://www.toptal.com/developers/gitignore/api/xilinxise

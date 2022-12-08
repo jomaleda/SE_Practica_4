@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2022-12-08T13:01:07</DateModified>
+  <DateModified>2022-12-08T17:02:10</DateModified>
   <ModuleName>system</ModuleName>
-  <SummaryTimeStamp>2022-12-08T13:01:06</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/jaroa/Desktop/Practica4/__xps/ise/system.xreport</SavedFilePath>
+  <SummaryTimeStamp>2022-12-08T17:02:10</SummaryTimeStamp>
+  <SavedFilePath>C:/XilinxProjects/Practica4.2/SE_Practica_4/__xps/ise/system.xreport</SavedFilePath>
   <FilterFile>filter.filter</FilterFile>
-  <SavedFilterFilePath>C:/Users/jaroa/Desktop/Practica4/__xps/ise</SavedFilterFilePath>
+  <SavedFilterFilePath>C:/XilinxProjects/Practica4.2/SE_Practica_4/__xps/ise</SavedFilterFilePath>
   <DateInitialized>2022-11-13T19:59:49</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
